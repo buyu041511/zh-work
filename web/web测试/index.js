@@ -1,1 +1,1 @@
-document.body.onclick
+document.body.onclick=function(){alert1()}
