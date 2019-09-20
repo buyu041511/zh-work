@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+//			1.封装一个用于计算的函数
+//			2.通过 prompt()函数,收取用户输入的数字和计算方式(+ - * /)
+//			3.通过函数进行计算,直接弹出结果
+//			4.请优先使用三目运算符(不使用也可以)
+		
+//			alert(22)
+//			console()
+	var one= Number(prompt("请输入第一个数字"))
+	var two= Number(prompt("请输入第二个数字"))
+	var three= prompt("请输入运算符+ - * /")
+	
+	
+//	console.log(one)
+//	console.log(three)  
+    function aaa(){
+    	
+    	three=='/'?alert(one/two):three=='*'?alert(one*two):three=='+'?alert(one+two):three=='-'?alert(one-two):alert("您的输入有误,请重新输入!");
+
+
+    }
+    aaa();
+		</script>
+	</body>
+</html>
