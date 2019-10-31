@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style>
+        div, ul, li {
+            margin: 0;
+            padding: 0
+        }
+
+        li {
+            float: left;
+            width: 120px;
+            height: 32px;
+            line-height: 28px;
+            list-style: none;
+            border: 1px solid gray;
+            text-align: center;
+        }
+
+        #cart {
+            width: 700px;
+            text-align: center;
+        }
+        #cart ul li img{
+        	width: 20px;
+        	height: 20px;
+        }
+        .num input {
+            width: 30px;
+            text-align: center;
+            color: #333333;
+           
+        }
+         
+        ul {
+            background-color: cornflowerblue;
+
+        }
+
+        .num {
+            width: 150px;
+        }
+
+        #total {
+            clear: both;
+            text-align: right;
+            padding-right: 50px;
+            padding-top: 5px;
+        }
+
+        #total {
+            font-size: 22px;
+            font-weight: 600;
+            
+        }
+        #hj{
+        	color: red;
+        }
+       .money{
+       	color: red;
+       }
+    </style>
+    <script src="jquery.js"></script>
+   
+</head>
+<body>
+<div id="cart">
+    <ul>
+        <li><input name="all" type="checkbox">全选</li>
+        <li>产品名称</li>
+        <li>价格</li>
+        <li class="num">数量</li>
+        <li id="hj">合计</li>
+    </ul>
+    <ul>
+        <li><input name="one" type="checkbox"></li>
+        <li><img src="huawei.jpg"/>华为</li>
+        <li class="money">1000.00</li>
+        <li class="num"><input type="button" value="-"> <input name="num" type="text" value="1"> <input type="button" value="+"></li>
+        <li class="price">1000.00</li>
+    </ul>
+    <ul>
+        <li><input name="one" type="checkbox"></li>
+        <li><img src="xiaomi.jpg"/>小米</li>
+        <li class="money">1000.00</li>
+        <li class="num"><input type="button" value="-"> <input name="num" type="text" value="1"> <input type="button"
+                                                                                                        value="+"></li>
+        <li class="price">1000.00</li>
+    </ul>
+    <div id="total">总价:<span>0.00</span></div>
+</div> 
+
+<script>
+        $(function () {
+            $("input[name='num']").change(function () {
+                var $val = parseFloat($(this).val());
+                if ($val > 0) {
+                    $(this).parent().next().text($val * parseFloat($(this).parent().prev().text()));
+                } else if ($val == 0) {
+                    $("#cart li span").trigger("click");
+                } else {
+                    $(this).val(1);
+                }
+                calcTotal();
+            });
+
+            $("input[value='-']").click(function () {
+                $(this).next().val(parseInt($(this).next().val()) - 1);
+                $("input[name='num']").trigger("change");
+            });
+            $("input[value='+']").click(function () {
+                $(this).prev().val(parseInt($(this).prev().val()) + 1);
+                $("input[name='num']").trigger("change");
+            });
+            $("input[name='one']").click(function () {
+            });
+
+            $("input[name='all']").click(function () {
+                var $ret = $(this).prop("checked");
+                $("input[name='one']").each(function () {
+                    $(this).prop('checked', $ret);
+                });
+                calcTotal();
+            });
+            
+            $("input[name='add']").click(function () {
+                var i = Math.floor((Math.random() * 4));
+                var $cloneNode = $modelNode.clone(true);
+                var $children = $cloneNode.children();
+                $children.eq(1).text(product[i]);
+                $children.eq(2).text(price[i]);
+                $children.eq(4).text(price[i]);
+                $("#total").before($modelNode);
+            });
+        })
+        function calcTotal() {
+            var total = 0;
+            var $checkBox = $("input[name='one']");
+            var $price = $(".price");
+            $checkBox.each(function () {
+                if ($(this).prop("checked")) {
+                    var i = $checkBox.index($(this));
+                    total += parseFloat($price.eq(i).text());
+                }
+            });
+            $("#total span").text(total);
+        }
+        
+    </script>
+    
+</body>
+</html>
